@@ -1,3 +1,4 @@
+package com.flipturnapps.chattoserver;
 import java.io.BufferedReader;
 import java.net.Socket;
 

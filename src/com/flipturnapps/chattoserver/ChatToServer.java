@@ -1,3 +1,4 @@
+package com.flipturnapps.chattoserver;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -40,7 +41,8 @@ public class ChatToServer extends ServerSocket implements Runnable
 				e.printStackTrace();
 			}
 			Socket s = null;
-			try {
+			try 
+			{
 				s = this.accept();
 			} catch (IOException e) 
 			{
