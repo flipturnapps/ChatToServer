@@ -31,20 +31,24 @@ public class ChatToServer extends ServerSocket implements Runnable
 	{
 		out("Server initalized");
 		clients = new ArrayList<Client>();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		while(true)
+		{
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) 
+			{
+				e.printStackTrace();
+			}
+			Socket s = null;
+			try {
+				s = this.accept();
+			} catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+			out("New client.");
+			this.clients.add(new Client(s));
 		}
-		Socket s = null;
-		try {
-			s = this.accept();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.clients.add(new Client(s));
 	}
 
 	private void out(String string)

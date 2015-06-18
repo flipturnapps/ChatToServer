@@ -1,12 +1,23 @@
+import java.io.BufferedReader;
 import java.net.Socket;
 
+import com.flipturnapps.kevinLibrary.helper.FlushWriter;
 
-public class Client 
+
+public class Client implements Runnable
 {
-
+	private FlushWriter writer;
+	private BufferedReader reader;
+	private Socket socket;
 	public Client(Socket s) 
 	{
-		// TODO Auto-generated constructor stub
+		
+	}
+
+	@Override
+	public void run() 
+	{
+		
 	}
 
 }
