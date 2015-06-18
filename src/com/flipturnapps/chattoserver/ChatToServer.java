@@ -57,13 +57,16 @@ public class ChatToServer extends ServerSocket implements Runnable
 			{
 				e.printStackTrace();
 			}
-			out("New client.");
-			try
+			if(s != null)
 			{
-				this.clients.add(new Client(s,this));
-			} catch (IOException e) 
-			{
-				e.printStackTrace();
+				out("New client.");
+				try
+				{
+					this.clients.add(new Client(s,this));
+				} catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -84,10 +87,13 @@ public class ChatToServer extends ServerSocket implements Runnable
 	private String getKeyByPhoneNum(String num) 
 	{
 		HashMap<String, String> map = ititializeMap();
+		String key;
 		if(map.containsKey(num))
-			return map.get(num);
+			key =  map.get(num);
 		else
-			return generateAndStoreNewKey(num,map);
+			key = generateAndStoreNewKey(num,map);
+		out("Retreived key for " + num + ": " + key);
+		return key;
 	}
 
 
@@ -96,11 +102,12 @@ public class ChatToServer extends ServerSocket implements Runnable
 		String newKey = getRandomString() + getRandomString();
 		map.remove(num);
 		map.put(num, newKey);
+		out("Generated key for " + num + ": " + newKey);
 		return newKey;
 	}
 	private String getRandomString()
 	{
-		return ((Math.random()*Math.random()*10000)+"").replace('.', (char) Numbers.random('A', 'Z'));
+		return ((Math.random()*Math.random()*Numbers.random(1,Integer.MAX_VALUE))+"").replace('.', (char) Numbers.random('A', 'Z'));
 	}
 
 	private HashMap<String, String> ititializeMap() 
